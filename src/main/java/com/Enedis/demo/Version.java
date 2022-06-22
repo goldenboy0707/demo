@@ -1,11 +1,11 @@
 package com.Enedis.demo;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import javax.persistence.*;
+
 @Entity
-@Table(name = "versio")
+@Table(name = "books")
 public class Version {
 
     public Long getId() {
@@ -16,23 +16,27 @@ public class Version {
         this.id = id;
     }
 
-    public int getVer() {
-        return ver;
+    public String  getVersa() {
+        return versa;
     }
 
-    public void setVer(int ver) {
-        this.ver = ver;
+    public void setVersa(String  versa) {
+        this.versa = versa;
     }
 
     @Id
     @GeneratedValue
+    @Column(name = "id")
     private Long id;
-    private int ver;
+    @Column(name = "versa")
+    private String  versa;
     public Version(){}
 
-    public Version(Long id, int ver){
+
+
+    public Version(Long id, String versa){
         this.id=id;
-        this.ver=ver;
+        this.versa=versa;
 
     }
 

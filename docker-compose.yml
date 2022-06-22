@@ -1,0 +1,47 @@
+ version: "3.8"
+ services:
+  # APP*****************************************
+  api:
+
+    build: .
+
+    container_name: api
+    #image: 'backend.jar'
+    ports:
+      - "8080:8080"
+    depends_on:
+      Database:
+        condition: service_healthy
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://Database:5432/testdb
+
+
+
+  Database:
+    image: postgres:latest
+    container_name: testdb
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: mohammed@
+      POSTGRES_USER: postgres
+      POSTGRES_DB: testdb
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -d testdb -h localhost -p 5432 -U postgres" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+ networks:
+   project_network:
+     external: true
+
+#######################################################################
+
+
+
+
+
+
+
+
